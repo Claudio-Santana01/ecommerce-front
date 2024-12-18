@@ -1,0 +1,64 @@
+/* Botão hamburguer com animação */
+.hamburger-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  z-index: 1002;
+  transition: transform 0.3s ease, color 0.3s ease; /* Transições suaves */
+}
+
+.hamburger-button:hover {
+  transform: scale(1.2); /* Efeito de zoom */
+  color: #9C27B0; /* Cor moderna */
+}
+
+.hamburger-button.open {
+  transform: rotate(90deg); /* Rotação quando o menu está aberto */
+}
+
+/* Estilização adicional do menu */
+.hamburger-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 250px;
+  height: 100%;
+  background-color: #222; /* Cor de fundo moderna */
+  transition: all 0.4s ease-in-out; /* Animação de deslizamento */
+  padding-top: 60px;
+  z-index: 1000;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5); /* Adiciona sombra */
+}
+
+.hamburger-menu.show {
+  left: 0; /* Abre o menu */
+}
+
+.menu-item {
+  transition: background-color 0.3s ease; /* Transição ao passar o mouse */
+}
+
+.menu-item:hover {
+  background-color: #6A1B9A; /* Nova cor de hover */
+  color: #FFF;
+  border-radius: 5px;
+}
+
+.close-button {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.close-button:hover {
+  transform: scale(1.2);
+  color: #F44336;
+}

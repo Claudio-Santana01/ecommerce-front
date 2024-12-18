@@ -1,0 +1,166 @@
+/* Estilo geral da página */
+.favoritos-container {
+    display: flex;
+    background-color: #121212; /* Fundo preto */
+    color: #FFFFFF; /* Texto branco */
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .menu-open {
+    margin-left: 200px; /* Ajuste o conteúdo principal quando o menu está aberto */
+    transition: margin 0.3s;
+  }
+  .favoritos-logo {
+    width: 150px;
+    height: auto;
+    margin: 0 auto 20px;
+    display: block;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Título da página */
+  .favoritos-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #9C27B0; /* Roxo */
+    text-align: center;
+  }
+  
+  /* Área de conteúdo dos favoritos */
+  .favoritos-content {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Mensagem de carregamento e erro */
+  .favoritos-loading, .favoritos-error {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #FF5733; /* Vermelho */
+  }
+  
+  /* Grid de cards */
+  .favoritos-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+  }
+  
+  /* Estilo dos cards */
+  .favoritos-card {
+    background-color: #1E1E1E; /* Preto escuro */
+    border: 2px solid #9C27B0; /* Roxo */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  
+  .favoritos-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Imagem do card */
+  .favoritos-card-image-container {
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .favoritos-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .favoritos-card-no-image {
+    background-color: #333;
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Conteúdo do card */
+  .favoritos-card-content {
+    padding: 10px;
+  }
+  
+  .favoritos-card-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #FFFFFF;
+  }
+  
+  .favoritos-card-author {
+    font-size: 1rem;
+    color: #999;
+    margin-bottom: 15px;
+  }
+  
+  /* Botão de remover favorito */
+  .favoritos-remove-button {
+    background-color: #FF5733;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+  }
+  
+  .favoritos-remove-button:hover {
+    background-color: #e74c3c;
+  }
+  
+  .favoritos-remove-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Mensagem de confirmação */
+  .favoritos-confirmation-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .menu-hamburguer ul li a {
+    color: #FFFFFF; /* Cor do texto */
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+  }
+  
+  .menu-hamburguer ul li a:hover {
+    background-color: #9C27B0; /* Cor roxa ao passar o mouse */
+  }
+  

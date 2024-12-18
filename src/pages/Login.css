@@ -1,0 +1,108 @@
+/* Estilo geral da página de login */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #121212; /* Fundo preto */
+    color: #FFFFFF; /* Texto branco */
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Estilo para a logo */
+  .login-logo {
+    width: 150px; /* Ajuste o tamanho da logo conforme necessário */
+    height: auto;
+    margin: 0 auto 20px; /* Centraliza horizontalmente */
+    display: block;
+    position: absolute;
+    top: 20%; /* Ajuste a posição vertical de acordo com a necessidade */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza horizontalmente usando o transform */
+  }
+  
+  /* Título da página de login */
+  .login-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #9C27B0; /* Roxo */
+    text-align: center;
+  }
+  
+  /* Contêiner do formulário */
+  .login-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1E1E1E; /* Fundo escuro */
+    padding: 20px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilo do campo de input */
+  .login-input {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #9C27B0;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    width: 100%;
+  }
+  
+  .login-input:focus {
+    outline: none;
+    border-color: #9C27B0;
+    box-shadow: 0 0 5px #9C27B0;
+  }
+  
+  /* Estilo do botão */
+  .login-button {
+    background-color: #9C27B0;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-button:hover {
+    background-color: #7b1fa2; /* Roxo mais escuro */
+  }
+  
+  .login-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Link para cadastro */
+  .signup-link {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .signup-link a {
+    color: #9C27B0;
+    text-decoration: none;
+  }
+  
+  .signup-link a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Estilo para a mensagem de erro */
+  .error-message {
+    color: #FF5733; /* Vermelho para mensagens de erro */
+    font-size: 1rem;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
