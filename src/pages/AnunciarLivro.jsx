@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import HamburgerMenu from '../components/HamburgerMenu';
 import './AnunciarLivro.css';
+import Logo from '../components/Logo';
 
 
 const AnunciarLivro = () => {
@@ -12,12 +13,7 @@ const AnunciarLivro = () => {
       <HamburgerMenu isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
 
       <div className={`anunciar-content ${isSidebarOpen ? 'sidebar-open' : ''}`}>
-        {/* Logo */}
-        <img
-          src="/Logo.jpeg"
-          alt="Logo"
-          className="anunciar-logo"
-        />
+        <Logo />
 
         {/* Título */}
         <h1 className="anunciar-title">Anunciar Livro</h1>

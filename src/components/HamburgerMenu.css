@@ -1,6 +1,11 @@
+.hamburger-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
 /* Botão hamburguer com animação */
 .hamburger-button {
-  position: absolute;
   top: 20px;
   left: 20px;
   font-size: 2rem;
@@ -25,12 +30,14 @@
 .hamburger-menu {
   position: fixed;
   top: 0;
-  left: -100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
   width: 250px;
   height: 100%;
   background-color: #222; /* Cor de fundo moderna */
   transition: all 0.4s ease-in-out; /* Animação de deslizamento */
-  padding-top: 60px;
+  padding: 16px 0;
   z-index: 1000;
   box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5); /* Adiciona sombra */
 }
@@ -39,7 +46,16 @@
   left: 0; /* Abre o menu */
 }
 
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .menu-item {
+  padding: 8px 16px;
+  height: 40px;
+  cursor: pointer;
   transition: background-color 0.3s ease; /* Transição ao passar o mouse */
 }
 
@@ -61,4 +77,21 @@
 .close-button:hover {
   transform: scale(1.2);
   color: #F44336;
+}
+
+.logout-button {
+  position: fixed;
+  bottom: 8px;
+  align-self: center;
+  cursor: pointer;
+  margin: 10px 0 10px 4px;
+  padding: 4px;
+  border: none;
+  border-radius: 4px;
+}
+
+.logout-button:hover {
+  transform: scale(1.2);
+  background-color: #F44336;
+  color: #fff;
 }

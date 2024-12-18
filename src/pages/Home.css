@@ -1,102 +1,109 @@
 /* Estilo geral da página */
 .home-container {
-    display: flex;
-    background-color: #121212; /* Fundo preto */
-    color: #FFFFFF; /* Texto branco */
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-  }
-  .home-logo { /*Estilo para a logo*/
-    width: 150px; /* Ajuste o tamanho da logo conforme necessário */
-    height: auto;
-    margin: 0 auto 20px; /* Centraliza horizontalmente */
-    display: block; /* Garante que a logo seja tratada como um bloco para usar 'margin: auto' */
-      /* Caso queira centralizar também verticalmente */
-    position: absolute;
-    top: 20%; /* Ajuste a posição vertical de acordo com a necessidade */
-    left: 50%;
-    transform: translateX(-50%); /* Centraliza horizontalmente usando o transform */
-  }
-  
-  .home-content {
-    padding: 20px;
-    transition: margin 0.3s;
-    flex: 1;
-  }
-  
-  .sidebar-open {
-    margin-left: 200px; /* Ajuste quando o menu está aberto */
-  }
-  
-  .home-title {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #9C27B0; /* Roxo */
-  }
-  
-  .home-loading {
-    text-align: center;
-    font-size: 1.2rem;
-  }
-  
+  display: flex;
+  background-color: #121212; /* Fundo preto */
+  color: #FFFFFF; /* Texto branco */
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
 
-  /* Grid dos cards */
-  .home-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-  }
-  
-  /* Estilo dos cards */
-  .home-card {
-    background-color: #1E1E1E; /* Preto escuro */
-    border: 2px solid #9C27B0; /* Roxo */
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-  }
-  
-  .home-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Imagem dos cards */
-  .home-card-image-container {
-    height: 150px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .home-card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .home-card-no-image {
-    background-color: #333;
-    color: #fff;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-  }
-  
-  /* Conteúdo dos cards */
-  .home-card-content {
-    padding: 10px;
-  }
-  
-  .home-card-title {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: #FFFFFF;
-  }
+.home-logo { /*Estilo para a logo*/
+  width: 150px; /* Ajuste o tamanho da logo conforme necessário */
+  height: auto;
+  margin: 0 auto 20px; /* Centraliza horizontalmente */
+  display: block; /* Garante que a logo seja tratada como um bloco para usar 'margin: auto' */
+    /* Caso queira centralizar também verticalmente */
+  position: absolute;
+  top: 20%; /* Ajuste a posição vertical de acordo com a necessidade */
+  left: 50%;
+  transform: translateX(-50%); /* Centraliza horizontalmente usando o transform */
+}
+
+.home-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  transition: margin 0.3s;
+  flex: 1;
+}
+
+.sidebar-open {
+  margin-left: 200px; /* Ajuste quando o menu está aberto */
+}
+
+.home-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #9C27B0; /* Roxo */
+}
+
+.home-loading {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.home-card-grid-container{
+  display: flex;
+}
+
+/* Grid dos cards */
+.home-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Estilo dos cards */
+.home-card {
+  background-color: #1E1E1E; /* Preto escuro */
+  border: 2px solid #9C27B0; /* Roxo */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.home-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Imagem dos cards */
+.home-card-image-container {
+  height: 150px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-card-no-image {
+  background-color: #333;
+  color: #fff;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* Conteúdo dos cards */
+.home-card-content {
+  padding: 10px;
+}
+
+.home-card-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #FFFFFF;
+}
   

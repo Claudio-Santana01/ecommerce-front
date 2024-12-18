@@ -1,77 +1,79 @@
 /* Estilo geral da página */
 .anunciar-container {
-    display: flex;
-    background-color: #121212; /* Fundo preto */
-    color: #FFFFFF; /* Texto branco */
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-  }
-  
-  .anunciar-content {
-    flex: 1;
-    padding: 20px;
-    transition: margin 0.3s;
-  }
-  
-  .sidebar-open {
-    margin-left: 200px; /* Ajuste para o menu aberto */
-  }
-  
-  /* Título da página */
-  .anunciar-title {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #9C27B0; /* Roxo */
-  }
-  
-  /* Formulário de anúncio */
-  .anunciar-form {
-    background-color: #1E1E1E; /* Preto escuro */
-    border: 2px solid #9C27B0; /* Roxo */
-    padding: 20px;
-    border-radius: 12px;
-    max-width: 600px;
-    margin: 0 auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  }
-  
-  .anunciar-form label {
-    display: block;
-    margin-bottom: 10px;
-    color: #FFFFFF;
-    font-weight: bold;
-  }
-  
-  .anunciar-form input,
-  .anunciar-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #9C27B0;
-    border-radius: 8px;
-    background-color: #2A2A2A;
-    color: #FFFFFF;
-  }
-  
-  .anunciar-form button {
-    background-color: #9C27B0;
-    color: #FFFFFF;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .anunciar-form button:hover {
-    background-color: #7B1FA2;
-  }
-  
-  /* Logo */
-  .anunciar-logo {
-    width: 150px;
-    margin: 20px auto;
-    display: block;
-  }
-  
+  display: flex;
+  background-color: #121212; /* Fundo preto */
+  color: #FFFFFF; /* Texto branco */
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.anunciar-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  transition: margin 0.2s;
+}
+
+.sidebar-open {
+  margin-left: 250px; /* Ajuste para o menu aberto */
+  /* transition: margin 0.5s; */
+}
+
+/* Título da página */
+.anunciar-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #9C27B0; /* Roxo */
+}
+
+/* Formulário de anúncio */
+.anunciar-form {
+  background-color: #1E1E1E; /* Preto escuro */
+  border: 2px solid #9C27B0; /* Roxo */
+  padding: 20px;
+  border-radius: 12px;
+  width: 70%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.anunciar-form label {
+  display: block;
+  margin-bottom: 10px;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.anunciar-form input,
+.anunciar-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #9C27B0;
+  border-radius: 8px;
+  background-color: #2A2A2A;
+  color: #FFFFFF;
+}
+
+.anunciar-form button {
+  background-color: #9C27B0;
+  color: #FFFFFF;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.anunciar-form button:hover {
+  background-color: #7B1FA2;
+}
+
+/* Logo */
+.anunciar-logo {
+  width: 150px;
+  margin: 20px auto;
+  display: block;
+}
