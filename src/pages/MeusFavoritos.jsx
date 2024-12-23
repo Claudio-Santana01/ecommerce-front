@@ -13,7 +13,11 @@ const MeusFavoritos = () => {
   useEffect(() => {
     const fetchFavoritos = async () => {
       try {
-        const response = await api.get('/api/user/favoritos');
+        const response = await api.get('/api/users/favorite', {
+          headers: {
+            'x-auth-token': localStorage.getItem('token'),
+          },
+        });
         setFavoritos(response.data);
       } catch (err) {
         setError('Erro ao carregar favoritos.');
@@ -23,6 +27,7 @@ const MeusFavoritos = () => {
     };
     fetchFavoritos();
   }, []);
+  
 
   return (
     <div className="favoritos-container">
@@ -40,9 +45,12 @@ const MeusFavoritos = () => {
         ) : (
           <div className="favoritos-card-grid">
             {favoritos.map((book) => (
-              <div key={book.id} className="favoritos-card">
+              <div key={book._id} className="favoritos-card">
                 <h2>{book.title}</h2>
-                <p>{book.author}</p>
+                <p><strong>Autor:</strong> {book.author}</p>
+                <p><strong>Gênero:</strong> {book.genre}</p>
+                <p><strong>Editora:</strong> {book.publisher}</p>
+                <p><strong>Preço:</strong> R${book.price ? Number(book.price).toFixed(2) : '0.00'}</p>
               </div>
             ))}
           </div>

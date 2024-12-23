@@ -106,4 +106,15 @@
   margin-bottom: 10px;
   color: #FFFFFF;
 }
-  
+.favorite-button {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: gold;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.favorite-button:hover {
+  transform: scale(1.2);
+}

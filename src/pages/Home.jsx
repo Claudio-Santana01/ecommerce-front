@@ -23,7 +23,20 @@ const Home = () => {
 
     fetchBooks();
   }, []);
-
+  const handleFavorite = async (bookId) => {
+    try {
+      await api.post('/api/users/favorite', { bookId }, {
+        headers: {
+          'x-auth-token': localStorage.getItem('token'), // Certifique-se de armazenar o token JWT
+        },
+      });
+      alert('Livro favoritado com sucesso!');
+    } catch (error) {
+      console.error('Erro ao favoritar o livro:', error);
+      alert('Erro ao favoritar o livro.');
+    }
+  };
+  
   const handleCardClick = (id) => {
     window.location.href = `/contact/${id}`; // Redireciona para a página de contato
   };
@@ -61,6 +74,15 @@ const Home = () => {
                     <p><strong>Gênero:</strong> {book.genre}</p>
                     <p><strong>Editora:</strong> {book.publisher}</p>
                     <p><strong>Preço:</strong> R${book.price ? Number(book.price).toFixed(2) : '0.00'}</p>
+                    <button
+                      className="favorite-button"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Impede a propagação do clique para o card
+                        handleFavorite(book._id);
+                      }}
+                    >
+                      ⭐
+                    </button>
                   </div>
                 </div>
               ))}
