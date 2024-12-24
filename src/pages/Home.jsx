@@ -23,19 +23,44 @@ const Home = () => {
 
     fetchBooks();
   }, []);
+  
   const handleFavorite = async (bookId) => {
     try {
-      await api.post('/api/users/favorite', { bookId }, {
-        headers: {
-          'x-auth-token': localStorage.getItem('token'), // Certifique-se de armazenar o token JWT
-        },
-      });
+      // Verifique e log os dados antes de enviar a requisição
+      const token = localStorage.getItem('token');
+      console.log('Book ID:', bookId);
+      console.log('Token JWT:', token);
+  
+      if (!token) {
+        alert('Você precisa estar logado para favoritar um livro.');
+        return;
+      }
+  
+      // Enviar requisição para favoritar o livro
+      const response = await api.post(
+        '/api/users/favorite',
+        { bookId }, // Corpo da requisição
+        {
+          headers: {
+            'x-auth-token': token, // Cabeçalho com o token
+          },
+        }
+      );
+  
+      // Verifique a resposta e notifique o usuário
+      console.log('Resposta da API:', response.data);
       alert('Livro favoritado com sucesso!');
     } catch (error) {
-      console.error('Erro ao favoritar o livro:', error);
-      alert('Erro ao favoritar o livro.');
+      // Exibir mensagens de erro detalhadas para facilitar o debug
+      console.error('Erro ao favoritar o livro:', error.response?.data || error.message);
+      alert(
+        `Erro ao favoritar o livro: ${
+          error.response?.data?.message || 'Erro desconhecido'
+        }`
+      );
     }
   };
+  
   
   const handleCardClick = (id) => {
     window.location.href = `/contact/${id}`; // Redireciona para a página de contato

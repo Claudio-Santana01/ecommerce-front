@@ -14,17 +14,29 @@ const Login = () => {
 
   const handleLogin = async () => {
     if (!email || !password) return;
-
+  
     setLoading(true);
     try {
       const response = await api.post('/api/auth/login', { email, password });
+  
+       // Verifique e salve o token no localStorage
+        const token = response.data.token;
+        console.log('Token recebido no login:', token); // Log para debug
+        localStorage.setItem('token', token);
+      
+      // Chama a função de contexto para atualizar o estado do usuário logado
       login(response.data);
+  
+      alert('Login realizado com sucesso!');
     } catch (err) {
+      console.error('Erro ao realizar login:', err.response?.data || err.message);
       setError(err.response?.data?.message || 'Erro ao realizar login.');
     } finally {
       setLoading(false);
     }
   };
+  
+
 
   return (
     <div className="login-container">
