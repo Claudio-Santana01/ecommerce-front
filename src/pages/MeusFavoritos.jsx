@@ -18,8 +18,10 @@ const MeusFavoritos = () => {
             'x-auth-token': localStorage.getItem('token'),
           },
         });
+        console.log('Favoritos recebidos:', response.data); // Debug
         setFavoritos(response.data);
       } catch (err) {
+        console.error('Erro ao carregar favoritos:', err);
         setError('Erro ao carregar favoritos.');
       } finally {
         setLoading(false);
