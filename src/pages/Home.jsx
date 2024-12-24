@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import HamburgerMenu from '../components/HamburgerMenu';
 import './Home.css'; // Importa o CSS
 import Logo from '../components/Logo'; // Importe o componente Logo
-import api from "../api"
+import api from "../api";
 
 const Home = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -23,19 +23,19 @@ const Home = () => {
 
     fetchBooks();
   }, []);
-  
+
   const handleFavorite = async (bookId) => {
     try {
       // Verifique e log os dados antes de enviar a requisição
       const token = localStorage.getItem('token');
       console.log('Book ID:', bookId);
       console.log('Token JWT:', token);
-  
+
       if (!token) {
         alert('Você precisa estar logado para favoritar um livro.');
         return;
       }
-  
+
       // Enviar requisição para favoritar o livro
       const response = await api.post(
         '/api/users/favorite',
@@ -46,7 +46,7 @@ const Home = () => {
           },
         }
       );
-  
+
       // Verifique a resposta e notifique o usuário
       console.log('Resposta da API:', response.data);
       alert('Livro favoritado com sucesso!');
@@ -60,8 +60,7 @@ const Home = () => {
       );
     }
   };
-  
-  
+
   const handleCardClick = (id) => {
     window.location.href = `/contact/${id}`; // Redireciona para a página de contato
   };
@@ -71,14 +70,14 @@ const Home = () => {
       <HamburgerMenu isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <div className={`home-content ${isSidebarOpen ? 'sidebar-open' : ''}`}>
         {/* A linha abaixo utiliza o componente Logo */}
-        <Logo /> 
+        <Logo />
 
         <h1 className="home-title">Bem-vindo à Home</h1>
 
         {loading ? (
           <p className="home-loading">Carregando livros...</p>
         ) : (
-          <div  className='home-card-grid-container'>
+          <div className='home-card-grid-container'>
             <div className="home-card-grid">
               {books.map((book) => (
                 <div
@@ -88,7 +87,11 @@ const Home = () => {
                 >
                   <div className="home-card-image-container">
                     {book.imageUrl ? (
-                      <img src={book.imageUrl} alt={book.title} className="home-card-image" />
+                      <img
+                        src={`http://localhost:8080${book.imageUrl}`} // Adicione o domínio do backend
+                        alt={book.title}
+                        className="home-card-image"
+                      />
                     ) : (
                       <div className="home-card-no-image">Sem imagem</div>
                     )}

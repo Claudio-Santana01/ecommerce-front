@@ -13,15 +13,13 @@ const MeusFavoritos = () => {
   useEffect(() => {
     const fetchFavoritos = async () => {
       try {
-        const response = await api.get('/api/users/favorite', {
+        const response = await api.get('/api/users/favorites', {
           headers: {
             'x-auth-token': localStorage.getItem('token'),
           },
         });
-        console.log('Favoritos recebidos:', response.data); // Debug
-        setFavoritos(response.data);
+        setFavoritos(response.data); // Salva os favoritos com todos os detalhes, incluindo imageUrl
       } catch (err) {
-        console.error('Erro ao carregar favoritos:', err);
         setError('Erro ao carregar favoritos.');
       } finally {
         setLoading(false);
@@ -29,14 +27,11 @@ const MeusFavoritos = () => {
     };
     fetchFavoritos();
   }, []);
-  
 
   return (
     <div className="favoritos-container">
-      {/* Menu Hamburguer */}
       <HamburgerMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
 
-      {/* Conteúdo principal */}
       <div className={`favoritos-content ${isMenuOpen ? 'menu-open' : ''}`}>
         <Logo className="favoritos-logo" />
         <h1 className="favoritos-title">Meus Favoritos</h1>
@@ -48,6 +43,17 @@ const MeusFavoritos = () => {
           <div className="favoritos-card-grid">
             {favoritos.map((book) => (
               <div key={book._id} className="favoritos-card">
+                <div className="favoritos-card-image-container">
+                  {book.imageUrl ? (
+                    <img
+                      src={`http://localhost:8080${book.imageUrl}`} // URL completa para o backend
+                      alt={book.title}
+                      className="favoritos-card-image"
+                    />
+                  ) : (
+                    <div className="favoritos-card-no-image">Sem imagem</div>
+                  )}
+                </div>
                 <h2>{book.title}</h2>
                 <p><strong>Autor:</strong> {book.author}</p>
                 <p><strong>Gênero:</strong> {book.genre}</p>

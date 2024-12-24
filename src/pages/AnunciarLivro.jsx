@@ -19,23 +19,35 @@ const AnunciarLivro = () => {
     genre: '',
     price: '',
     description: '',
+    image: null, // Novo campo para armazenar o arquivo
   });
 
   // Função para lidar com mudanças nos inputs
   const handleInputChange = (e) => {
-    const { id, value } = e.target; // Captura o id (name) e o valor do campo
+    const { id, value, files } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [id]: value, // Atualiza o campo correspondente no estado
+      [id]: files ? files[0] : value, // Armazena o arquivo se for um input de tipo file
     }));
   };
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (e) => {
     e.preventDefault(); // Evita o comportamento padrão do formulário
+    
+    const data = new FormData();
+    Object.keys(formData).forEach((key) => {
+      data.append(key, formData[key]);
+    });
+
+    console.log('Dados enviados:', data); // Log para depuração
 
     try {
-      const response = await api.post('/api/books/add', formData); // Faz o POST
+      const response = await api.post('/api/books/add', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       console.log('Livro anunciado com sucesso:', response.data);
       alert('Livro anunciado com sucesso!');
       navigate('/home');
@@ -112,9 +124,7 @@ const AnunciarLivro = () => {
             onChange={handleInputChange}
           />
 
-          {/* <label htmlFor="image">Inserir Imagem:</label>
-          <input type="file" id="image" accept="image/*" /> */}
-
+      
           <label htmlFor="description">Descrição:</label>
           <textarea
             id="description"
@@ -123,6 +133,9 @@ const AnunciarLivro = () => {
             value={formData.description}
             onChange={handleInputChange}
           ></textarea>
+          
+          <label htmlFor="image">Capa do Livro:</label>
+          <input type="file" id="image" onChange={handleInputChange} />
 
           <button type="submit">Anunciar</button>
         </form>

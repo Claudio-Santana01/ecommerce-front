@@ -33,7 +33,7 @@ const HamburgerMenu = ({ isOpen, setIsOpen }) => {
             <button
               className="menu-item"
               onClick={() => {
-                navigate('/home'); // Redireciona para a rota AnunciarLivro
+                navigate('/home'); // Redireciona para a Home
               }}
             >
               Home
