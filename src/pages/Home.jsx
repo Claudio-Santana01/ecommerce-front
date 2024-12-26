@@ -63,6 +63,8 @@ const Home = () => {
 
   const handleCardClick = (id) => {
     window.location.href = `/contact/${id}`; // Redireciona para a página de contato
+    console.log('Redirecionando para o livro com ID:', id);
+
   };
 
   return (

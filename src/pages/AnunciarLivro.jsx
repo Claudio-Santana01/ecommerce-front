@@ -5,9 +5,8 @@ import './AnunciarLivro.css';
 import Logo from '../components/Logo';
 import api from '../api';
 
-
 const AnunciarLivro = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Estados para os campos do formulário
@@ -22,6 +21,8 @@ const AnunciarLivro = () => {
     image: null, // Novo campo para armazenar o arquivo
   });
 
+  const [error, setError] = useState(''); // Estado para mensagens de erro
+
   // Função para lidar com mudanças nos inputs
   const handleInputChange = (e) => {
     const { id, value, files } = e.target;
@@ -34,7 +35,13 @@ const AnunciarLivro = () => {
   // Função para lidar com o envio do formulário
   const handleSubmit = async (e) => {
     e.preventDefault(); // Evita o comportamento padrão do formulário
-    
+
+    const token = localStorage.getItem('token'); // Obtém o token do localStorage
+    if (!token) {
+      setError('Usuário não autenticado. Faça login novamente.');
+      return;
+    }
+
     const data = new FormData();
     Object.keys(formData).forEach((key) => {
       data.append(key, formData[key]);
@@ -46,14 +53,16 @@ const AnunciarLivro = () => {
       const response = await api.post('/api/books/add', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'x-auth-token': token, // Inclui o token no cabeçalho da requisição
         },
       });
+
       console.log('Livro anunciado com sucesso:', response.data);
       alert('Livro anunciado com sucesso!');
       navigate('/home');
     } catch (error) {
       console.error('Erro ao anunciar o livro:', error);
-      alert('Ocorreu um erro ao anunciar o livro. Tente novamente.');
+      setError('Ocorreu um erro ao anunciar o livro. Tente novamente.');
     }
   };
 
@@ -67,6 +76,8 @@ const AnunciarLivro = () => {
 
         {/* Título */}
         <h1 className="anunciar-title">Anunciar Livro</h1>
+
+        {error && <div className="error-message">{error}</div>} {/* Exibe a mensagem de erro */}
 
         {/* Formulário de Anúncio */}
         <form className="anunciar-form" onSubmit={handleSubmit}>
@@ -124,7 +135,6 @@ const AnunciarLivro = () => {
             onChange={handleInputChange}
           />
 
-      
           <label htmlFor="description">Descrição:</label>
           <textarea
             id="description"
@@ -133,7 +143,7 @@ const AnunciarLivro = () => {
             value={formData.description}
             onChange={handleInputChange}
           ></textarea>
-          
+
           <label htmlFor="image">Capa do Livro:</label>
           <input type="file" id="image" onChange={handleInputChange} />
 

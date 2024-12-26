@@ -4,7 +4,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
 import AnunciarLivro from './pages/AnunciarLivro';
-import MeusFavoritos from './pages/MeusFavoritos'; // Importe a nova página
+import MeusFavoritos from './pages/MeusFavoritos';
+import Contact from './pages/Contact'; // Importa a página Contact
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './context/PrivateRoute';
 
@@ -13,9 +14,12 @@ const App = () => {
     <Router>
       <AuthProvider>
         <Routes>
+          {/* Página Login */}
           <Route path="/" element={<Login />} />
+
+          {/* Página de Cadastro */}
           <Route path="/signup" element={<Signup />} />
-          
+
           {/* Página Home - Protegida por PrivateRoute */}
           <Route
             path="/home"
@@ -25,7 +29,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
-          
+
           {/* Página AnunciarLivro - Protegida por PrivateRoute */}
           <Route
             path="/anunciar"
@@ -35,13 +39,23 @@ const App = () => {
               </PrivateRoute>
             }
           />
-          
-          {/* Nova Rota para MeusFavoritos - Protegida por PrivateRoute */}
+
+          {/* Página MeusFavoritos - Protegida por PrivateRoute */}
           <Route
             path="/favoritos"
             element={
               <PrivateRoute>
                 <MeusFavoritos />
+              </PrivateRoute>
+            }
+          />
+
+          {/* Página de Contato - Protegida por PrivateRoute */}
+          <Route
+            path="/contact/:id" // Aceita o ID do livro como parâmetro
+            element={
+              <PrivateRoute>
+                <Contact />
               </PrivateRoute>
             }
           />
