@@ -34,6 +34,7 @@ const HamburgerMenu = ({ isOpen, setIsOpen }) => {
               className="menu-item"
               onClick={() => {
                 navigate('/home'); // Redireciona para a Home
+                setIsOpen(false); // Fecha o menu
               }}
             >
               Home
@@ -42,6 +43,7 @@ const HamburgerMenu = ({ isOpen, setIsOpen }) => {
               className="menu-item"
               onClick={() => {
                 navigate('/anunciar'); // Redireciona para a rota AnunciarLivro
+                setIsOpen(false); // Fecha o menu
               }}
             >
               Anunciar
@@ -50,9 +52,19 @@ const HamburgerMenu = ({ isOpen, setIsOpen }) => {
               className="menu-item"
               onClick={() => {
                 navigate('/favoritos'); // Redireciona para a rota Meus Favoritos
+                setIsOpen(false); // Fecha o menu
               }}
             >
               Meus Favoritos
+            </button>
+            <button
+              className="menu-item"
+              onClick={() => {
+                navigate('/top-books'); // Redireciona para a rota dos Top Livros Mais Buscados
+                setIsOpen(false); // Fecha o menu
+              }}
+            >
+              Top Livros
             </button>
           </div>
           
