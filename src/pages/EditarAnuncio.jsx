@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
+import { useNavigate } from 'react-router-dom'; // Importa o hook useNavigate
 import './EditarAnuncio.css';
 
 const EditarAnuncio = () => {
+  const navigate = useNavigate(); // Inicializa o hook useNavigate
   const [formData, setFormData] = useState({
     title: '',
     author: '',
@@ -15,7 +17,7 @@ const EditarAnuncio = () => {
   });
 
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  
 
   useEffect(() => {
     // Carregar os dados do anúncio salvos no localStorage
@@ -72,11 +74,13 @@ const EditarAnuncio = () => {
       await api.put(`/api/books/${anuncioId}`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'x-auth-token': localStorage.getItem('token'),
         },
       });
   
-      setSuccess('Alterações salvas com sucesso!');
       setError('');
+      alert('Livro favoritado com sucesso!');
+      navigate('/meus-anuncios');
     } catch (err) {
       console.error('Erro ao salvar alterações:', err);
       setError('Erro ao salvar as alterações. Tente novamente mais tarde.');
@@ -89,7 +93,6 @@ const EditarAnuncio = () => {
       <h1 className="editar-anuncio-title">Editar Anúncio</h1>
 
       {error && <p className="editar-anuncio-error">{error}</p>}
-      {success && <p className="editar-anuncio-success">{success}</p>}
 
       {!error && (
         <form className="editar-form" onSubmit={handleSubmit}>
