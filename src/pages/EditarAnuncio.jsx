@@ -79,7 +79,7 @@ const EditarAnuncio = () => {
       });
   
       setError('');
-      alert('Livro favoritado com sucesso!');
+      alert('Alterações salvas com sucesso!');
       navigate('/meus-anuncios');
     } catch (err) {
       console.error('Erro ao salvar alterações:', err);
