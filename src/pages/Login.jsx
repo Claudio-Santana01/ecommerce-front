@@ -18,25 +18,19 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await api.post('/api/auth/login', { email, password });
-  
-       // Verifique e salve o token no localStorage
-        const token = response.data.token;
-        console.log('Token recebido no login:', token); // Log para debug
-        localStorage.setItem('token', token);
-      
-      // Chama a função de contexto para atualizar o estado do usuário logado
-      login(response.data);
-  
-      alert('Login realizado com sucesso!');
+      const { token, userId } = response.data; // Certifique-se de que o backend retorna 'userId'
+      localStorage.setItem('token', token); // Salva o token
+      localStorage.setItem('userId', userId); // Salva o userId
+      login(response.data); // Lógica de autenticação no contexto
     } catch (err) {
-      console.error('Erro ao realizar login:', err.response?.data || err.message);
       setError(err.response?.data?.message || 'Erro ao realizar login.');
     } finally {
       setLoading(false);
     }
   };
   
-
+  
+  
 
   return (
     <div className="login-container">

@@ -1,0 +1,70 @@
+.meus-anuncios-container {
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .meus-anuncios-title {
+    text-align: center;
+    color: #a371f7;
+    margin-bottom: 20px;
+  }
+  
+  .meus-anuncios-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .meus-anuncios-card {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    width: 250px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .meus-anuncios-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .meus-anuncios-info h2 {
+    color: #a371f7;
+    margin-bottom: 10px;
+  }
+  
+  .meus-anuncios-info p {
+    margin: 5px 0;
+  }
+  
+  .meus-anuncios-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .edit-button,
+  .delete-button {
+    background-color: #a371f7;
+    border: none;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .edit-button:hover {
+    background-color: #7e58c2;
+  }
+  
+  .delete-button:hover {
+    background-color: #c74b4b;
+  }
+  
