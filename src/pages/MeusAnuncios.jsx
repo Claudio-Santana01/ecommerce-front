@@ -12,26 +12,42 @@ const MeusAnuncios = () => {
   useEffect(() => {
     const fetchMyAds = async () => {
       try {
-        // Obtenha o userId do localStorage
         const userId = localStorage.getItem('userId');
-        
-        // Verifica se o userId existe
         if (!userId) {
           setError('ID do usuário não encontrado. Faça login novamente.');
           return;
         }
-
-        // Faz a requisição ao backend
         const response = await api.get(`/api/books/my-ads?userId=${userId}`);
-        setAnuncios(response.data); // Atualiza o estado com os anúncios retornados
+        setAnuncios(response.data);
       } catch (error) {
         console.error('Erro ao buscar anúncios:', error);
         setError('Erro ao carregar anúncios. Tente novamente mais tarde.');
       }
     };
 
-    fetchMyAds(); // Chama a função para buscar os anúncios
+    fetchMyAds();
   }, []);
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Tem certeza que deseja excluir este anúncio?')) {
+      try {
+        await api.delete(`/api/books/${id}`, {
+          headers: { 'x-auth-token': localStorage.getItem('token') },
+        });
+        setAnuncios((prevAnuncios) => prevAnuncios.filter((anuncio) => anuncio._id !== id)); // Atualiza a lista de anúncios
+        alert('Anúncio excluído com sucesso!');
+      } catch (error) {
+        console.error('Erro ao excluir anúncio:', error);
+        alert('Erro ao excluir o anúncio. Tente novamente mais tarde.');
+      }
+    }
+  };
+
+  const handleEdit = (anuncio) => {
+    // Redireciona para a página de edição com os dados do anúncio
+    localStorage.setItem('anuncioParaEditar', JSON.stringify(anuncio));
+    window.location.href = '/editar-anuncio';
+  };
 
   return (
     <div className="meus-anuncios-container">
@@ -56,6 +72,20 @@ const MeusAnuncios = () => {
                   <p><strong>Autor:</strong> {anuncio.author}</p>
                   <p><strong>Editora:</strong> {anuncio.publisher}</p>
                   <p><strong>Preço:</strong> R${anuncio.price.toFixed(2)}</p>
+                </div>
+                <div className="meus-anuncios-actions">
+                  <button
+                    className="edit-button"
+                    onClick={() => handleEdit(anuncio)}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDelete(anuncio._id)}
+                  >
+                    Excluir
+                  </button>
                 </div>
               </div>
             ))}

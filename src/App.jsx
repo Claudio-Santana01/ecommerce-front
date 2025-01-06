@@ -7,7 +7,8 @@ import AnunciarLivro from './pages/AnunciarLivro';
 import MeusFavoritos from './pages/MeusFavoritos';
 import Contact from './pages/Contact'; // Importa a página Contact
 import TopBooks from './pages/TopBooks'; // Importa a página TopBooks
-import MeusAnuncios from './pages/MeusAnuncios'; // Importa a nova página Meus Anúncios
+import MeusAnuncios from './pages/MeusAnuncios'; // Importa a página Meus Anúncios
+import EditarAnuncio from './pages/EditarAnuncio'; // Importa a página Editar Anúncio
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './context/PrivateRoute';
 
@@ -78,6 +79,16 @@ const App = () => {
             element={
               <PrivateRoute>
                 <MeusAnuncios />
+              </PrivateRoute>
+            }
+          />
+
+          {/* Página Editar Anúncio - Protegida por PrivateRoute */}
+          <Route
+            path="/editar-anuncio"
+            element={
+              <PrivateRoute>
+                <EditarAnuncio />
               </PrivateRoute>
             }
           />
