@@ -10,6 +10,7 @@ const Contact = () => {
   const [contactDetails, setContactDetails] = useState(null); // Armazena os dados do contato (livro e usuário)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Estado do menu lateral
 
   useEffect(() => {
     const fetchContactDetails = async () => {
@@ -52,8 +53,8 @@ const Contact = () => {
 
   return (
     <div className="contact-container">
-      <HamburgerMenu />
-      <div className="contact-content">
+      <HamburgerMenu isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      <div className={`contact-content ${isSidebarOpen ? 'sidebar-open' : ''}`}>
         <Logo />
         <h1 className="contact-title">Detalhes do Contato</h1>
 

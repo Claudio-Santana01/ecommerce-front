@@ -54,7 +54,7 @@ const MeusAnuncios = () => {
       <HamburgerMenu isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <div className={`meus-anuncios-content ${isSidebarOpen ? 'sidebar-open' : ''}`}>
         <div className="meus-anuncios-header">
-          <Logo />
+        <Logo className="logo" />
         </div>
         <h1 className="meus-anuncios-title">Meus Anúncios</h1>
         {error ? (
@@ -63,10 +63,11 @@ const MeusAnuncios = () => {
           <div className="meus-anuncios-list">
             {anuncios.map((anuncio) => (
               <div key={anuncio._id} className="meus-anuncios-card">
-                <img
-                  src={`http://localhost:8080${anuncio.image || '/sem-imagem.png'}`}
+               <img
+                  src={`http://localhost:8080${anuncio.imageUrl || '/uploads/sem-imagem.png'}`}
                   alt={anuncio.title}
-                />
+/>
+
                 <div className="meus-anuncios-info">
                   <h2>{anuncio.title}</h2>
                   <p><strong>Autor:</strong> {anuncio.author}</p>
