@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo';
 import Input from '../components/Input';
 import api from '../api';
-import './Signup.css'; // Importando o CSS para aplicar os estilos
+import './Signup.css';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -18,10 +18,14 @@ const Signup = () => {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false); // Controla o modal
   const navigate = useNavigate();
-  
-  // Obter a data atual no formato adequado para o atributo `max`
-  const today = new Date().toISOString().split('T')[0];
+
+  // Data mínima para que o usuário tenha 16 anos
+  const today = new Date();
+  const maxValidDate = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate())
+    .toISOString()
+    .split('T')[0];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +33,15 @@ const Signup = () => {
   };
 
   const handleSignup = async () => {
-    const { password, confirmPassword } = formData;
+    const { password, confirmPassword, dob } = formData;
+
+    // Verificar se a idade mínima foi respeitada
+    const userAge = new Date().getFullYear() - new Date(dob).getFullYear();
+    if (userAge < 16) {
+      setError('Você precisa ter pelo menos 16 anos para se cadastrar.');
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError('As senhas não coincidem.');
       return;
@@ -40,6 +52,7 @@ const Signup = () => {
     setLoading(true);
     try {
       await api.post('/api/auth/register', { name: formData.fullName, email: formData.email, password });
+      alert('Cadastrado com sucesso!');
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.message || 'Erro ao realizar cadastro.');
@@ -53,73 +66,82 @@ const Signup = () => {
       <Logo className="signup-logo" />
       <div className="signup-form-container">
         <h1 className="signup-title">Crie sua conta</h1>
-        <Input 
-          label="Nome Completo" 
-          type="text" 
-          name="fullName" 
-          value={formData.fullName} 
-          onChange={handleChange} 
-          className="signup-input" 
+        <Input
+          label="Nome Completo"
+          type="text"
+          name="fullName"
+          value={formData.fullName}
+          onChange={handleChange}
+          className="signup-input"
         />
-        <Input 
-          label="Endereço" 
-          type="text" 
-          name="address" 
-          value={formData.address} 
-          onChange={handleChange} 
-          className="signup-input" 
+        <Input
+          label="Endereço"
+          type="text"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          className="signup-input"
         />
-        <Input 
-          label="E-mail" 
-          type="email" 
-          name="email" 
-          value={formData.email} 
-          onChange={handleChange} 
-          className="signup-input" 
+        <Input
+          label="E-mail"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          className="signup-input"
         />
         <div className="signup-flex-container">
-          <Input 
-            label="Data Nascimento" 
-            max={today} 
-            type="date" 
-            name="dob" 
-            value={formData.dob} 
-            onChange={handleChange} 
-            className="signup-input" 
-          />
-          <Input 
-            label="Telefone" 
-            type="tel" 
-            name="phone" 
-            value={formData.phone} 
-            onChange={handleChange} 
-            className="signup-input" 
-          />
+          <div className="dob-container">
+            <label className="dob-label">
+              Data de Nascimento
+              <span className="info-icon" onClick={() => setShowModal(true)}>?</span>
+            </label>
+            <Input
+              type="date"
+              max={maxValidDate}
+              name="dob"
+              value={formData.dob}
+              onChange={handleChange}
+              className="signup-input"
+            />
+          </div>
+          <div className="dob-container">
+            <label className="dob-label-tel">
+              Telefone
+            </label>
+            <Input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="signup-input"
+            />
+          </div>
         </div>
-        <Input 
-          label="Nickname" 
-          type="text" 
-          name="nickname" 
-          value={formData.nickname} 
-          onChange={handleChange} 
-          className="signup-input" 
+        <Input
+          label="Nickname"
+          type="text"
+          name="nickname"
+          value={formData.nickname}
+          onChange={handleChange}
+          className="signup-input"
         />
         <div className="signup-flex-container">
-          <Input 
-            label="Senha" 
-            type="password" 
-            name="password" 
-            value={formData.password} 
-            onChange={handleChange} 
-            className="signup-input" 
+          <Input
+            label="Senha"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            className="signup-input"
           />
-          <Input 
-            label="Repita a Senha" 
-            type="password" 
-            name="confirmPassword" 
-            value={formData.confirmPassword} 
-            onChange={handleChange} 
-            className="signup-input" 
+          <Input
+            label="Repita a Senha"
+            type="password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            className="signup-input"
           />
         </div>
         <button
@@ -134,8 +156,20 @@ const Signup = () => {
           Já tem cadastro? <a href="/" className="login-link">Faça o login</a>
         </p>
       </div>
+
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Data de Nascimento</h2>
+            <p>Para se cadastrar, você deve ter pelo menos 16 anos.</p>
+            <button onClick={() => setShowModal(false)} className="close-modal-button">
+              Fechar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default Signup;

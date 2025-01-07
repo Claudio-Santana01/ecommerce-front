@@ -1,116 +1,189 @@
 /* Estilo geral da página de cadastro */
 .signup-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #121212; /* Fundo preto */
-    color: #FFFFFF; /* Texto branco */
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Estilo para a logo */
-  .signup-logo {
-    width: 150px; /* Ajuste o tamanho da logo conforme necessário */
-    height: auto;
-    margin: 0 auto 20px; /* Centraliza horizontalmente */
-    display: block;
-    position: absolute;
-    top: 20%; /* Ajuste a posição vertical de acordo com a necessidade */
-    left: 50%;
-    transform: translateX(-50%); /* Centraliza horizontalmente usando o transform */
-  }
-  
-  /* Título da página de cadastro */
-  .signup-title {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    color: #9C27B0; /* Roxo */
-    text-align: center;
-  }
-  
-  /* Contêiner do formulário */
-  .signup-form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #1E1E1E; /* Fundo escuro */
-    padding: 20px;
-    border-radius: 12px;
-    width: 80%;
-    max-width: 500px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Flexbox para inputs lado a lado */
-  .signup-flex-container {
-    display: flex;
-    gap: 32px;
-    width: 100%;
-    justify-content: space-between;
-  }
-  
-  /* Estilo do campo de input */
-  .signup-input {
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #9C27B0;
-    border-radius: 6px;
-    padding: 10px;
-    margin-bottom: 15px;
-    font-size: 1rem;
-    width: 100%;
-  }
-  
-  .signup-input:focus {
-    outline: none;
-    border-color: #9C27B0;
-    box-shadow: 0 0 5px #9C27B0;
-  }
-  
-  /* Estilo do botão */
-  .signup-button {
-    background-color: #9C27B0;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 10px;
-    font-size: 1rem;
-    width: 100%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .signup-button:hover {
-    background-color: #7b1fa2; /* Roxo mais escuro */
-  }
-  
-  .signup-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  /* Link para login */
-  .login-link {
-    margin-top: 15px;
-    text-align: center;
-  }
-  
-  .login-link a {
-    color: #9C27B0;
-    text-decoration: none;
-  }
-  
-  .login-link a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Estilo para a mensagem de erro */
-  .error-message {
-    color: #FF5733; /* Vermelho para mensagens de erro */
-    font-size: 1rem;
-    margin-top: 10px;
-    text-align: center;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #121212; /* Fundo preto */
+  color: #FFFFFF; /* Texto branco */
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo para a logo */
+.signup-logo {
+  width: 150px; /* Ajuste o tamanho da logo conforme necessário */
+  height: auto;
+  margin: 0 auto 20px; /* Centraliza horizontalmente */
+  display: block;
+  position: absolute;
+  top: 20%; /* Ajuste a posição vertical de acordo com a necessidade */
+  left: 50%;
+  transform: translateX(-50%); /* Centraliza horizontalmente usando o transform */
+}
+
+/* Título da página de cadastro */
+.signup-title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #9C27B0; /* Roxo */
+  text-align: center;
+}
+
+/* Contêiner do formulário */
+.signup-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1E1E1E; /* Fundo escuro */
+  padding: 20px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Flexbox para inputs lado a lado */
+.signup-flex-container {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+/* Estilo do campo de input */
+.signup-input {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #9C27B0;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.signup-input:focus {
+  outline: none;
+  border-color: #9C27B0;
+  box-shadow: 0 0 5px #9C27B0;
+}
+
+/* Estilo do botão */
+.signup-button {
+  background-color: #9C27B0;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 1rem;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+  background-color: #7b1fa2; /* Roxo mais escuro */
+}
+
+.signup-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Link para login */
+.login-link {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.login-link a {
+  color: #9C27B0;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo para a mensagem de erro */
+.error-message {
+  color: #FF5733; /* Vermelho para mensagens de erro */
+  font-size: 1rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.dob-container {
+  width: 100%;
+}
+
+.dob-label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #fff; /* Ajuste a cor conforme necessário */
+  margin-bottom: 8px;
+}
+
+.dob-label-tel {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #fff; /* Ajuste a cor conforme necessário */
+  margin-bottom: 9px;
+}
+
+.info-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.close-modal-button {
+  background: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.close-modal-button:hover {
+  background: #0056b3;
+}

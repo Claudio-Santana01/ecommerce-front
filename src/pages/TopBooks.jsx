@@ -28,7 +28,7 @@ const TopBooks = () => {
       return `http://localhost:8080${imageUrl}`;
     }
     // Retorna o caminho da imagem genérica
-    return '/sem-imagem.png';
+    return 'https://www.moveisdoportinho.com.br/v2.1/ui/fotosprincipal/imagens/imagens/produto-sem-imagem.png';
   };
 
   return (

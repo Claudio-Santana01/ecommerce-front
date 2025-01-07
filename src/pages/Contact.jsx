@@ -9,8 +9,8 @@ const Contact = () => {
   const { id } = useParams(); // Obtém o ID do livro da URL
   const [contactDetails, setContactDetails] = useState(null); // Armazena os dados do contato (livro e usuário)
   const [loading, setLoading] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [error, setError] = useState('');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Estado do menu lateral
 
   useEffect(() => {
     const fetchContactDetails = async () => {
@@ -39,7 +39,32 @@ const Contact = () => {
     };
 
     fetchContactDetails();
-  }, [id]);
+  }, []);
+
+  // useEffect(() => {
+  //   const fetchAddViewInBook = async () => {
+  //     try {
+  //       const token = localStorage.getItem('token'); // Obtém o token do localStorage
+  //       if (!token) {
+  //         setError('Usuário não autenticado. Faça login.');
+  //         setLoading(false);
+  //         return;
+  //       }
+
+  //       // Faz a chamada para a API
+  //       await api.get(`/api/books/${id}`, {
+  //         headers: { 'x-auth-token': token },
+  //       });
+  //     } catch (error) {
+  //       console.error('Erro ao visualizar o livro:', error);
+  //       const errorMessage =
+  //         error.response?.data?.message || 'Erro ao visualizar o livro';
+  //       setError(errorMessage);
+  //     }
+  //   };
+
+  //   fetchAddViewInBook();
+  // }, []);
 
   if (loading) {
     return <div className="contact-loading">Carregando...</div>;
@@ -54,7 +79,7 @@ const Contact = () => {
   return (
     <div className="contact-container">
       <HamburgerMenu isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-      <div className={`contact-content ${isSidebarOpen ? 'sidebar-open' : ''}`}>
+      <div className="contact-content">
         <Logo />
         <h1 className="contact-title">Detalhes do Contato</h1>
 

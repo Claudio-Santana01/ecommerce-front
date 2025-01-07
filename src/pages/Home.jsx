@@ -95,7 +95,11 @@ const Home = () => {
                         className="home-card-image"
                       />
                     ) : (
-                      <div className="home-card-no-image">Sem imagem</div>
+                      <img
+                        src={'https://www.moveisdoportinho.com.br/v2.1/ui/fotosprincipal/imagens/imagens/produto-sem-imagem.png'} // Adicione o domínio do backend
+                        alt={book.title}
+                        className="home-card-image"
+                      />
                     )}
                   </div>
                   <div className="home-card-content">

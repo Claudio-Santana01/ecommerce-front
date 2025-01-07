@@ -1,21 +1,17 @@
 .contact-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background-color: #121212;
   color: #FFFFFF;
   min-height: 100vh;
   font-family: Arial, sans-serif;
-  padding: 20px;
 }
 
 .contact-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  width: 100%; /* Garante que o conteúdo seja responsivo */
+  padding: 20px;
+  flex: 1;
 }
 
 .contact-title {
@@ -30,9 +26,6 @@
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 80%; /* Reduz a largura do card em 20% */
-  max-width: 600px; /* Limita o tamanho máximo */
-  text-align: left;
 }
 
 .contact-details h2 {
@@ -50,9 +43,4 @@
   text-align: center;
   font-size: 1.2rem;
   color: #FF5252;
-}
-
-.logo {
-  margin-bottom: 20px; /* Espaço entre a logo e o conteúdo */
-  align-self: center;
 }

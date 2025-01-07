@@ -51,14 +51,20 @@ const MeusFavoritos = () => {
                       className="favoritos-card-image"
                     />
                   ) : (
-                    <div className="favoritos-card-no-image">Sem imagem</div>
+                    <img
+                        src={'https://www.moveisdoportinho.com.br/v2.1/ui/fotosprincipal/imagens/imagens/produto-sem-imagem.png'} // Adicione o domínio do backend
+                        alt={book.title}
+                        className="favoritos-card-image"
+                      />
                   )}
                 </div>
-                <h2>{book.title}</h2>
-                <p><strong>Autor:</strong> {book.author}</p>
-                <p><strong>Gênero:</strong> {book.genre}</p>
-                <p><strong>Editora:</strong> {book.publisher}</p>
-                <p><strong>Preço:</strong> R${book.price ? Number(book.price).toFixed(2) : '0.00'}</p>
+                <div className='favoritos-card-content' >
+                  <h2>{book.title}</h2>
+                  <p><strong>Autor:</strong> {book.author}</p>
+                  <p><strong>Gênero:</strong> {book.genre}</p>
+                  <p><strong>Editora:</strong> {book.publisher}</p>
+                  <p><strong>Preço:</strong> R${book.price ? Number(book.price).toFixed(2) : '0.00'}</p>
+                </div>
               </div>
             ))}
           </div>

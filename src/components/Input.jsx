@@ -2,7 +2,7 @@ import React from 'react';
 
 const Input = ({ label, type, name, ...rest }) => (
   <div style={{ width: '100%', marginBottom: '16px' }}>
-    <label style={{ display: 'block', marginBottom: '8px' }}>{label}</label>
+    {label && <label style={{ display: 'block', marginBottom: '8px' }}>{label}</label>}
     <input
       type={type}
       name={name}

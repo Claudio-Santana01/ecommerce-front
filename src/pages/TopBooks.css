@@ -50,7 +50,7 @@
   .top-books-image img {
     width: 60px;
     height: 80px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 4px;
     margin-right: 0.5rem;
   }
