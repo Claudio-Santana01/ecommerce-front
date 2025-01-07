@@ -43,6 +43,33 @@
     height: 100px;
   }
   
+  /* Estilo geral do botão cancelar */
+.cancel-button {
+  background-color: #FF5252; /* Cor vermelha para indicar ação de cancelamento */
+  color: #FFFFFF; /* Texto branco */
+  border: none; /* Sem borda */
+  border-radius: 8px; /* Borda arredondada */
+  padding: 10px 20px; /* Espaçamento interno */
+  font-size: 1rem; /* Tamanho da fonte */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  margin-bottom: 15px; /* Espaçamento abaixo do botão */
+  width: 100%; /* Mesmo tamanho do botão "Salvar Alterações" */
+  transition: background-color 0.3s ease; /* Transição suave */
+}
+
+.cancel-button:hover {
+  background-color: #E53935; /* Cor mais escura ao passar o mouse */
+}
+
+.cancel-button:active {
+  background-color: #D32F2F; /* Cor ainda mais escura ao clicar */
+}
+
+.cancel-button:focus {
+  outline: none; /* Remove o contorno padrão */
+  box-shadow: 0 0 5px 2px rgba(255, 82, 82, 0.75); /* Adiciona um destaque ao foco */
+}
+
   button {
     background-color: #a371f7;
     color: #fff;

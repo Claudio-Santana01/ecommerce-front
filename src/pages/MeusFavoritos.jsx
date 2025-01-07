@@ -28,6 +28,26 @@ const MeusFavoritos = () => {
     fetchFavoritos();
   }, []);
 
+  const handleUnfavorite = async (bookId) => {
+    try {
+      const response = await api.post(
+        '/api/users/unfavorite',
+        { bookId },
+        {
+          headers: {
+            'x-auth-token': localStorage.getItem('token'),
+          },
+        }
+      );
+
+      setFavoritos((prev) => prev.filter((book) => book._id !== bookId)); // Remove o livro da lista
+      alert(response.data.message || 'Livro removido dos favoritos com sucesso!');
+    } catch (err) {
+      console.error('Erro ao remover favorito:', err);
+      alert('Erro ao remover livro dos favoritos.');
+    }
+  };
+
   return (
     <div className="favoritos-container">
       <HamburgerMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
@@ -52,19 +72,36 @@ const MeusFavoritos = () => {
                     />
                   ) : (
                     <img
-                        src={'https://www.moveisdoportinho.com.br/v2.1/ui/fotosprincipal/imagens/imagens/produto-sem-imagem.png'} // Adicione o domínio do backend
-                        alt={book.title}
-                        className="favoritos-card-image"
-                      />
+                      src={
+                        'https://www.moveisdoportinho.com.br/v2.1/ui/fotosprincipal/imagens/imagens/produto-sem-imagem.png'
+                      } // Imagem padrão
+                      alt={book.title}
+                      className="favoritos-card-image"
+                    />
                   )}
                 </div>
-                <div className='favoritos-card-content' >
+                <div className="favoritos-card-content">
                   <h2>{book.title}</h2>
-                  <p><strong>Autor:</strong> {book.author}</p>
-                  <p><strong>Gênero:</strong> {book.genre}</p>
-                  <p><strong>Editora:</strong> {book.publisher}</p>
-                  <p><strong>Preço:</strong> R${book.price ? Number(book.price).toFixed(2) : '0.00'}</p>
+                  <p>
+                    <strong>Autor:</strong> {book.author}
+                  </p>
+                  <p>
+                    <strong>Gênero:</strong> {book.genre}
+                  </p>
+                  <p>
+                    <strong>Editora:</strong> {book.publisher}
+                  </p>
+                  <p>
+                    <strong>Preço:</strong> R$
+                    {book.price ? Number(book.price).toFixed(2) : '0.00'}
+                  </p>
                 </div>
+                <button
+                  className="unfavorite-button"
+                  onClick={() => handleUnfavorite(book._id)}
+                >
+                  Remover 
+                </button>
               </div>
             ))}
           </div>

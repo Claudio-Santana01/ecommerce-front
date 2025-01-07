@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api';
-import { useNavigate } from 'react-router-dom'; // Importa o hook useNavigate
+import { useNavigate } from 'react-router-dom';
 import './EditarAnuncio.css';
 
 const EditarAnuncio = () => {
-  const navigate = useNavigate(); // Inicializa o hook useNavigate
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     author: '',
@@ -17,10 +17,8 @@ const EditarAnuncio = () => {
   });
 
   const [error, setError] = useState('');
-  
 
   useEffect(() => {
-    // Carregar os dados do anúncio salvos no localStorage
     const anuncioParaEditar = localStorage.getItem('anuncioParaEditar');
     if (anuncioParaEditar) {
       const anuncio = JSON.parse(anuncioParaEditar);
@@ -32,7 +30,7 @@ const EditarAnuncio = () => {
         genre: anuncio.genre || '',
         price: anuncio.price || '',
         description: anuncio.description || '',
-        image: null, // Imagem não é carregada diretamente
+        image: null,
       });
     } else {
       setError('Nenhum anúncio encontrado para editar.');
@@ -49,12 +47,11 @@ const EditarAnuncio = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Evita o comportamento padrão do formulário
-  
+    e.preventDefault();
+
     try {
       const { title, author, publisher, publishedYear, genre, price, description, image } = formData;
-  
-      // Cria um FormData para enviar a imagem junto com os outros dados
+
       const formDataToSend = new FormData();
       formDataToSend.append('title', title);
       formDataToSend.append('author', author);
@@ -66,18 +63,16 @@ const EditarAnuncio = () => {
       if (image) {
         formDataToSend.append('image', image);
       }
-  
-      // Obtém o ID do anúncio armazenado no localStorage
+
       const anuncioId = JSON.parse(localStorage.getItem('anuncioParaEditar'))._id;
-  
-      // Faz a requisição PUT para o backend
+
       await api.put(`/api/books/${anuncioId}`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'x-auth-token': localStorage.getItem('token'),
         },
       });
-  
+
       setError('');
       alert('Alterações salvas com sucesso!');
       navigate('/meus-anuncios');
@@ -86,7 +81,10 @@ const EditarAnuncio = () => {
       setError('Erro ao salvar as alterações. Tente novamente mais tarde.');
     }
   };
-  
+
+  const handleCancel = () => {
+    navigate('/meus-anuncios');
+  };
 
   return (
     <div className="editar-anuncio-container">
@@ -162,6 +160,9 @@ const EditarAnuncio = () => {
           <label htmlFor="image">Capa do Livro:</label>
           <input type="file" id="image" onChange={handleInputChange} />
 
+          <button type="button" className="cancel-button" onClick={handleCancel}>
+            Cancelar
+          </button>
           <button type="submit">Salvar Alterações</button>
         </form>
       )}

@@ -33,7 +33,7 @@ const Signup = () => {
   };
 
   const handleSignup = async () => {
-    const { password, confirmPassword, dob } = formData;
+    const { password, confirmPassword, dob, fullName, email, phone, address, nickname } = formData;
 
     // Verificar se a idade mínima foi respeitada
     const userAge = new Date().getFullYear() - new Date(dob).getFullYear();
@@ -47,11 +47,21 @@ const Signup = () => {
       return;
     }
 
-    if (Object.values(formData).some((field) => !field)) return;
+    if (Object.values(formData).some((field) => !field)) {
+      setError('Todos os campos são obrigatórios.');
+      return;
+    }
 
     setLoading(true);
     try {
-      await api.post('/api/auth/register', { name: formData.fullName, email: formData.email, password });
+      await api.post('/api/auth/register', {
+        name: fullName,
+        email,
+        password,
+        phone,
+        address,
+        nickname,
+      });
       alert('Cadastrado com sucesso!');
       navigate('/');
     } catch (err) {

@@ -57,6 +57,10 @@
 
 /* Estilo dos cards */
 .favoritos-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza os itens dentro do card */
+  justify-content: space-between; /* Espaço uniforme entre os itens */
   background-color: #1E1E1E; /* Preto escuro */
   border: 2px solid #9C27B0; /* Roxo */
   border-radius: 12px;
@@ -100,6 +104,7 @@
 /* Conteúdo do card */
 .favoritos-card-content {
   padding: 10px;
+  text-align: center; /* Centraliza o texto dentro do card */
 }
 
 .favoritos-card-title {
@@ -123,8 +128,10 @@
   padding: 8px 15px;
   font-size: 1rem;
   cursor: pointer;
-  width: 100%;
+  width: auto; /* Define largura automática */
   transition: background-color 0.3s;
+  margin: 0 auto; /* Centraliza o botão horizontalmente */
+  display: block; /* Garante que o botão seja tratado como bloco */
 }
 
 .favoritos-remove-button:hover {
