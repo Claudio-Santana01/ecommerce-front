@@ -158,24 +158,22 @@ const Signup = () => {
           onChange={handleChange}
           className="signup-input"
         />
-        <div className="signup-flex-container">
-          <Input
-            label="Senha"
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="signup-input"
-          />
-          <Input
-            label="Repita a Senha"
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            className="signup-input"
-          />
-        </div>
+        <Input
+          label="Senha"
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          className="signup-input"
+        />
+        <Input
+          label="Repita a Senha"
+          type="password"
+          name="confirmPassword"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          className="signup-input"
+        />
         <button
           disabled={Object.values(formData).some((field) => field === '') || loading}
           className="signup-button"

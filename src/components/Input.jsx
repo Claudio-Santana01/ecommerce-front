@@ -7,7 +7,7 @@ const Input = ({ label, type, name, ...rest }) => (
       type={type}
       name={name}
       style={{
-        width: '100%',
+        width: '95%',
         padding: '8px',
         fontSize: '16px',
         border: '1px solid #ccc',
