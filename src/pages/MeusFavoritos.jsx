@@ -10,8 +10,13 @@ const MeusFavoritos = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  const didFetch = React.useRef(false);
   useEffect(() => {
     const fetchFavoritos = async () => {
+
+      if (didFetch.current) return; // Se já executou, não faz nada
+      didFetch.current = true;
+
       try {
         const response = await api.get('/api/users/favorites', {
           headers: {

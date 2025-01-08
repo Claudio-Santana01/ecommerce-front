@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import InputMask from 'react-input-mask'; // Para a máscara
 import Logo from '../components/Logo';
 import Input from '../components/Input';
 import api from '../api';
@@ -12,6 +13,7 @@ const Signup = () => {
     email: '',
     dob: '',
     phone: '',
+    isWhatsApp: false, // Novo campo
     nickname: '',
     password: '',
     confirmPassword: '',
@@ -28,12 +30,16 @@ const Signup = () => {
     .split('T')[0];
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
   };
 
   const handleSignup = async () => {
-    const { password, confirmPassword, dob, fullName, email, phone, address, nickname } = formData;
+    const { password, confirmPassword, dob, fullName, email, phone, isWhatsApp, address, nickname } =
+      formData;
 
     // Verificar se a idade mínima foi respeitada
     const userAge = new Date().getFullYear() - new Date(dob).getFullYear();
@@ -47,7 +53,7 @@ const Signup = () => {
       return;
     }
 
-    if (Object.values(formData).some((field) => !field)) {
+    if (Object.values(formData).some((field) => field === '')) {
       setError('Todos os campos são obrigatórios.');
       return;
     }
@@ -59,6 +65,7 @@ const Signup = () => {
         email,
         password,
         phone,
+        isWhatsApp, // Envia o novo campo
         address,
         nickname,
       });
@@ -104,7 +111,9 @@ const Signup = () => {
           <div className="dob-container">
             <label className="dob-label">
               Data de Nascimento
-              <span className="info-icon" onClick={() => setShowModal(true)}>?</span>
+              <span className="info-icon" onClick={() => setShowModal(true)}>
+                ?
+              </span>
             </label>
             <Input
               type="date"
@@ -116,16 +125,29 @@ const Signup = () => {
             />
           </div>
           <div className="dob-container">
-            <label className="dob-label-tel">
-              Telefone
-            </label>
-            <Input
-              type="tel"
-              name="phone"
+            <label className="dob-label-tel">Telefone</label>
+            <InputMask
+              mask="(99) 99999-9999"
               value={formData.phone}
+              name="phone"
               onChange={handleChange}
               className="signup-input"
-            />
+            >
+              {(inputProps) => (
+                <input {...inputProps} type="tel" placeholder="Digite o telefone" />
+              )}
+            </InputMask>
+            <div className="whatsapp-container">
+              <label>
+                <input
+                  type="checkbox"
+                  name="isWhatsApp"
+                  checked={formData.isWhatsApp}
+                  onChange={handleChange}
+                />
+                Este número é WhatsApp
+              </label>
+            </div>
           </div>
         </div>
         <Input
@@ -155,7 +177,7 @@ const Signup = () => {
           />
         </div>
         <button
-          disabled={Object.values(formData).some((field) => !field) || loading}
+          disabled={Object.values(formData).some((field) => field === '') || loading}
           className="signup-button"
           onClick={handleSignup}
         >

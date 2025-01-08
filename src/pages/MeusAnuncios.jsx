@@ -9,8 +9,14 @@ const MeusAnuncios = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [error, setError] = useState(''); // Estado para capturar erros
 
+  const didFetch = React.useRef(false);
+  
   useEffect(() => {
     const fetchMyAds = async () => {
+      
+      if (didFetch.current) return; // Se já executou, não faz nada
+      didFetch.current = true;
+      
       try {
         const userId = localStorage.getItem('userId');
         if (!userId) {

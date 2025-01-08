@@ -8,8 +8,13 @@ const TopBooks = () => {
   const [books, setBooks] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  const didFetch = React.useRef(false);
   useEffect(() => {
     const fetchTopBooks = async () => {
+
+      if (didFetch.current) return; // Se já executou, não faz nada
+      didFetch.current = true;
+      
       try {
         const response = await api.get('/api/books/most-searched');
         setBooks(response.data);

@@ -187,3 +187,20 @@
 .close-modal-button:hover {
   background: #0056b3;
 }
+
+.whatsapp-container {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.whatsapp-container label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.whatsapp-container input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}

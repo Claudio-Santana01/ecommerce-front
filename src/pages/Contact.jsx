@@ -12,8 +12,14 @@ const Contact = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [error, setError] = useState('');
 
+  const didFetch = React.useRef(false);
+
   useEffect(() => {
     const fetchContactDetails = async () => {
+
+      if (didFetch.current) return; // Se já executou, não faz nada
+      didFetch.current = true;
+      
       try {
         const token = localStorage.getItem('token'); // Obtém o token do localStorage
         if (!token) {
@@ -91,9 +97,15 @@ const Contact = () => {
           <p>
             <strong>Nome Completo:</strong> {contact?.fullName || 'Não informado'}
           </p>
-          <p>
-            <strong>Telefone:</strong> {contact?.phone || 'Não informado'}
-          </p>
+          <p><strong>Telefone:</strong> {contact.phone}{' '}
+              {contact.isWhatsApp && (
+                <img
+                  src="/icons/whatsapp-icon.png" // Use o caminho correto para o ícone
+                  alt="WhatsApp"
+                  style={{ width: '20px', marginLeft: '8px' }}
+                />
+              )}
+            </p>
           <p>
             <strong>E-mail:</strong> {contact?.email || 'Não informado'}
           </p>

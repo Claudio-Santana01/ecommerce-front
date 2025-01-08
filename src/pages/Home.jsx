@@ -9,8 +9,13 @@ const Home = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const didFetch = React.useRef(false);
+
   useEffect(() => {
     const fetchBooks = async () => {
+      if (didFetch.current) return; // Se já executou, não faz nada
+      didFetch.current = true;
+      
       try {
         const response = await api.get('api/books');
         setBooks(response.data);
