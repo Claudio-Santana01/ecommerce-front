@@ -13,6 +13,7 @@ const Contact = () => {
   const [error, setError] = useState('');
 
   const didFetch = React.useRef(false);
+  const didFetchBook = React.useRef(false);
 
   useEffect(() => {
     const fetchContactDetails = async () => {
@@ -47,30 +48,33 @@ const Contact = () => {
     fetchContactDetails();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchAddViewInBook = async () => {
-  //     try {
-  //       const token = localStorage.getItem('token'); // Obtém o token do localStorage
-  //       if (!token) {
-  //         setError('Usuário não autenticado. Faça login.');
-  //         setLoading(false);
-  //         return;
-  //       }
+  useEffect(() => {
+    const fetchAddViewInBook = async () => {
+      if (didFetchBook.current) return; // Se já executou, não faz nada
+      didFetchBook.current = true;
 
-  //       // Faz a chamada para a API
-  //       await api.get(`/api/books/${id}`, {
-  //         headers: { 'x-auth-token': token },
-  //       });
-  //     } catch (error) {
-  //       console.error('Erro ao visualizar o livro:', error);
-  //       const errorMessage =
-  //         error.response?.data?.message || 'Erro ao visualizar o livro';
-  //       setError(errorMessage);
-  //     }
-  //   };
+      try {
+        const token = localStorage.getItem('token'); // Obtém o token do localStorage
+        if (!token) {
+          setError('Usuário não autenticado. Faça login.');
+          setLoading(false);
+          return;
+        }
 
-  //   fetchAddViewInBook();
-  // }, []);
+        // Faz a chamada para a API
+        await api.get(`/api/books/${id}`, {
+          headers: { 'x-auth-token': token },
+        });
+      } catch (error) {
+        console.error('Erro ao visualizar o livro:', error);
+        const errorMessage =
+          error.response?.data?.message || 'Erro ao visualizar o livro';
+        setError(errorMessage);
+      }
+    };
+
+    fetchAddViewInBook();
+  }, []);
 
   if (loading) {
     return <div className="contact-loading">Carregando...</div>;
