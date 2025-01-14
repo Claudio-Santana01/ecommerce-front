@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import HamburgerMenu from '../components/HamburgerMenu';
+import SearchBar from '../components/SearchBar';
 import './Home.css'; // Importa o CSS
 import Logo from '../components/Logo'; // Importe o componente Logo
-import api from "../api";
+import api from '../api';
 
 const Home = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [books, setBooks] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
 
   const didFetch = React.useRef(false);
@@ -15,10 +18,11 @@ const Home = () => {
     const fetchBooks = async () => {
       if (didFetch.current) return; // Se já executou, não faz nada
       didFetch.current = true;
-      
+
       try {
         const response = await api.get('api/books');
         setBooks(response.data);
+        setFilteredBooks(response.data); // Inicializa os livros filtrados com todos os livros
         setLoading(false);
       } catch (error) {
         console.error('Erro ao buscar os livros:', error);
@@ -29,34 +33,42 @@ const Home = () => {
     fetchBooks();
   }, []);
 
+  // Filtra os livros conforme o texto digitado na barra de pesquisa
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    if (!query) {
+      setFilteredBooks(books); // Se o campo de busca estiver vazio, retorna todos os livros
+    } else {
+      const lowerCaseQuery = query.toLowerCase();
+      const filtered = books.filter(
+        (book) =>
+          book.title.toLowerCase().includes(lowerCaseQuery) ||
+          book.author.toLowerCase().includes(lowerCaseQuery)
+      );
+      setFilteredBooks(filtered);
+    }
+  };
+
   const handleFavorite = async (bookId) => {
     try {
-      // Verifique e log os dados antes de enviar a requisição
       const token = localStorage.getItem('token');
-      console.log('Book ID:', bookId);
-      console.log('Token JWT:', token);
-
       if (!token) {
         alert('Você precisa estar logado para favoritar um livro.');
         return;
       }
 
-      // Enviar requisição para favoritar o livro
       const response = await api.post(
         '/api/users/favorite',
-        { bookId }, // Corpo da requisição
+        { bookId },
         {
           headers: {
-            'x-auth-token': token, // Cabeçalho com o token
+            'x-auth-token': token,
           },
         }
       );
 
-      // Verifique a resposta e notifique o usuário
-      console.log('Resposta da API:', response.data);
       alert('Livro favoritado com sucesso!');
     } catch (error) {
-      // Exibir mensagens de erro detalhadas para facilitar o debug
       console.error('Erro ao favoritar o livro:', error.response?.data || error.message);
       alert(
         `Erro ao favoritar o livro: ${
@@ -68,15 +80,22 @@ const Home = () => {
 
   const handleCardClick = (id) => {
     window.location.href = `/contact/${id}`; // Redireciona para a página de contato
-    console.log('Redirecionando para o livro com ID:', id);
-
   };
 
   return (
     <div className="home-container">
       <HamburgerMenu isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+
+      {/* Barra de Pesquisa no topo direito */}
+      <div className="search-bar-container">
+        <SearchBar
+          placeholder="Pesquisar por título ou autor..."
+          value={searchQuery}
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+      </div>
+
       <div className={`home-content ${isSidebarOpen ? 'sidebar-open' : ''}`}>
-        {/* A linha abaixo utiliza o componente Logo */}
         <Logo />
 
         <h1 className="home-title">Bem-vindo à Home</h1>
@@ -84,9 +103,9 @@ const Home = () => {
         {loading ? (
           <p className="home-loading">Carregando livros...</p>
         ) : (
-          <div className='home-card-grid-container'>
+          <div className="home-card-grid-container">
             <div className="home-card-grid">
-              {books.map((book) => (
+              {filteredBooks.map((book) => (
                 <div
                   key={book._id}
                   className="home-card"
@@ -95,13 +114,13 @@ const Home = () => {
                   <div className="home-card-image-container">
                     {book.imageUrl ? (
                       <img
-                        src={`http://localhost:8080${book.imageUrl}`} // Adicione o domínio do backend
+                        src={`http://localhost:8080${book.imageUrl}`}
                         alt={book.title}
                         className="home-card-image"
                       />
                     ) : (
                       <img
-                        src={'https://www.moveisdoportinho.com.br/v2.1/ui/fotosprincipal/imagens/imagens/produto-sem-imagem.png'} // Adicione o domínio do backend
+                        src={'https://www.moveisdoportinho.com.br/v2.1/ui/fotosprincipal/imagens/imagens/produto-sem-imagem.png'}
                         alt={book.title}
                         className="home-card-image"
                       />
@@ -116,7 +135,7 @@ const Home = () => {
                     <button
                       className="favorite-button"
                       onClick={(e) => {
-                        e.stopPropagation(); // Impede a propagação do clique para o card
+                        e.stopPropagation();
                         handleFavorite(book._id);
                       }}
                     >

@@ -118,3 +118,38 @@
 .favorite-button:hover {
   transform: scale(1.2);
 }
+
+.search-bar-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.search-bar {
+  width: 300px;
+  padding: 8px 12px;
+  border: 2px solid #9C27B0;
+  border-radius: 20px;
+  border-bottom: none; /* Remove a linha */
+  outline: none; /* Remove o contorno ao focar */
+  font-size: 1rem;
+  color: #FFFFFF;
+  background-color: #121212;
+  transition: all 0.3s ease;
+  box-shadow: none; /* Remove qualquer sombra */
+}
+
+.search-bar::placeholder {
+  color: #999;
+}
+
+.search-bar:focus {
+  border-color: #FFFFFF;
+  background-color: #1E1E1E;
+  border-bottom: none; /* Garante que a linha não apareça ao focar */
+  outline: none; /* Remove o contorno */
+}
+
+
+
