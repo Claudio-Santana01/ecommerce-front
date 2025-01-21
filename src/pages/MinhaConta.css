@@ -1,0 +1,97 @@
+
+/* Estilo básico semelhante ao Home.css */
+.minha-conta-container {
+  position: relative; /* Para que o menu seja posicionado relativamente à tela */
+  background-color: #1e1e1e;
+  color: #fff;
+  margin: auto;
+  display: flex
+}
+
+.minha-conta-content{
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.tel-date{
+  display: flex;
+  width: 95%;
+  justify-content: space-between;
+}
+
+.minha-conta-flex-container{
+  display: flex;
+  width: 100%;
+}
+
+.minha-conta-logo {
+  display: block;
+  margin: 0 auto; /* Centraliza horizontalmente */
+  margin-bottom: 20px; /* Adiciona espaço abaixo da logo */
+  max-width: 150px; /* Define um tamanho máximo para a logo */
+}
+.minha-conta-title {
+  color: #d500f9; /* Roxo claro */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.minha-conta-input {
+  background-color: #2a2a2a;
+  color: #fff;
+  border: 1px solid #9c27b0;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.minha-conta-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 36%;
+}
+
+.update-button{
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  width: auto;
+  background-color: #9c27b0;
+  color: #fff;
+}
+
+.delete-button{
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  width: auto;
+  background-color: #f44336;
+  color: #fff;
+}
+
+.cancel-button-mc {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  width: auto;
+  height: 50px;
+  background-color: #d500f9;
+  color: #fff;
+}
+
+.update-button:hover,
+.delete-button:hover,
+.cancel-button:hover {
+  opacity: 0.9;
+}

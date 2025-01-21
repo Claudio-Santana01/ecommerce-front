@@ -15,6 +15,14 @@ const Home = () => {
   const didFetch = React.useRef(false);
 
   useEffect(() => {
+     // Recupera o token e o ID do usuário do localStorage
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+
+  // Log para verificar os valores
+    console.log('Token do usuário:', token);
+    console.log('ID do usuário:', userId);
+
     const fetchBooks = async () => {
       if (didFetch.current) return; // Se já executou, não faz nada
       didFetch.current = true;

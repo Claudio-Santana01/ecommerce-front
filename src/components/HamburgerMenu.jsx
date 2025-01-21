@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { FaUserCircle } from 'react-icons/fa'; // Import the user icon
 import './HamburgerMenu.css';
 
 const HamburgerMenu = ({ isOpen, setIsOpen }) => {
@@ -9,7 +10,7 @@ const HamburgerMenu = ({ isOpen, setIsOpen }) => {
 
   return (
     <div className="hamburger-container">
-      {/* Botão do menu hambúrguer */}
+      {/* Hamburger button */}
       <button
         className={`hamburger-button ${isOpen ? 'open' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
@@ -17,10 +18,10 @@ const HamburgerMenu = ({ isOpen, setIsOpen }) => {
         {isOpen ? '✖' : '☰'}
       </button>
 
-      {/* Menu hambúrguer */}
+      {/* Hamburger menu */}
       {isOpen && (
         <div className={`hamburger-menu ${isOpen ? 'show' : ''}`}>
-          {/* Lista de links do menu */}
+          {/* Menu list */}
           <div className="menu-list">
             <button
               className="menu-item"
@@ -67,14 +68,24 @@ const HamburgerMenu = ({ isOpen, setIsOpen }) => {
             >
               Meus Anúncios
             </button>
+            {/*  "Minha Conta" opção nova */}
+            <button
+              className="menu-item"
+              onClick={() => {
+                navigate('/minha-conta');
+                setIsOpen(false);
+              }}
+            >
+              <FaUserCircle className="menu-icon" /> Minha Conta
+            </button>
           </div>
 
-          {/* Botão de Logout */}
+          {/* Logout button */}
           <button
             onClick={() => {
               logout();
               setIsOpen(false);
-              navigate('/'); // Redireciona para a página de login
+              navigate('/'); // Redirect to login page
             }}
             className="logout-button"
           >

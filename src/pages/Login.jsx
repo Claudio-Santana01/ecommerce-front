@@ -4,6 +4,7 @@ import Logo from '../components/Logo';
 import Input from '../components/Input';
 import api from '../api';
 import './Login.css'; // Importando o CSS para aplicar os estilos
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -18,10 +19,14 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await api.post('/api/auth/login', { email, password });
-      const { token, userId } = response.data; // Certifique-se de que o backend retorna 'userId'
-      localStorage.setItem('token', token); // Salva o token
-      localStorage.setItem('userId', userId); // Salva o userId
-      login(response.data); // Lógica de autenticação no contexto
+      const { token, userId } = response.data;
+  
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', userId);
+      login(response.data);
+  
+      // Popup simples indicando sucesso
+      alert('Login efetuado com sucesso!');
     } catch (err) {
       setError(err.response?.data?.message || 'Erro ao realizar login.');
     } finally {

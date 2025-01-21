@@ -9,6 +9,7 @@ import Contact from './pages/Contact'; // Importa a página Contact
 import TopBooks from './pages/TopBooks'; // Importa a página TopBooks
 import MeusAnuncios from './pages/MeusAnuncios'; // Importa a página Meus Anúncios
 import EditarAnuncio from './pages/EditarAnuncio'; // Importa a página Editar Anúncio
+import MinhaConta from './pages/MinhaConta';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './context/PrivateRoute';
 
@@ -90,6 +91,16 @@ const App = () => {
               <PrivateRoute>
                 <EditarAnuncio />
               </PrivateRoute>
+            }
+          />
+          
+          {/* Página Minha Conta - Protegida por PrivateRoute*/}
+          <Route 
+            path="/minha-conta" 
+            element={
+              <PrivateRoute>
+                <MinhaConta />
+              </PrivateRoute> 
             }
           />
         </Routes>
