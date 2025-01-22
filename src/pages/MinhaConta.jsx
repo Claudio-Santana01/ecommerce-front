@@ -32,7 +32,17 @@ const MinhaConta = () => {
             'x-auth-token': token,
           },
         });
-        setFormData(response.data);
+        console.log('Dados do usuário:', response.data); // Adicionado para verificar a estrutura
+        setFormData((prev) => ({
+          ...prev,
+          fullName: response.data.fullName || response.data.name || '', // Ajusta para o campo correto
+          address: response.data.address || '',
+          email: response.data.email || '',
+          dob: response.data.dob || '',
+          phone: response.data.phone || '',
+          isWhatsApp: response.data.isWhatsApp || false,
+          nickname: response.data.nickname || '',
+        }));
       } catch (err) {
         console.error('Erro ao buscar dados do usuário:', err);
         setError('Erro ao carregar dados do usuário.');
@@ -40,6 +50,7 @@ const MinhaConta = () => {
     };
     fetchUserData();
   }, []);
+  
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -50,6 +61,8 @@ const MinhaConta = () => {
   };
 
   const handleUpdate = async () => {
+    console.log('Dados enviados:', formData); // Log dos dados que serão enviados
+  
     try {
       setLoading(true);
       const userId = localStorage.getItem('userId');
@@ -61,12 +74,15 @@ const MinhaConta = () => {
       });
       alert('Dados atualizados com sucesso!');
     } catch (err) {
-      console.error('Erro ao atualizar os dados:', err);
+      console.error('Erro ao atualizar os dados:', err.message);
       setError('Erro ao atualizar os dados.');
     } finally {
       setLoading(false);
     }
   };
+  
+  
+  
 
   const handleDelete = async () => {
     const confirmDelete = window.confirm('Tem certeza de que deseja excluir sua conta?');
