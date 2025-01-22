@@ -1,4 +1,4 @@
-.contact-container {
+.contact-container { 
   display: flex;
   background-color: #121212;
   color: #FFFFFF;
@@ -43,4 +43,88 @@
   text-align: center;
   font-size: 1.2rem;
   color: #FF5252;
+}
+
+.review-form {
+  margin-bottom: 20px;
+}
+
+.rating-container {
+  display: flex;
+  gap: 5px;
+}
+
+.star {
+  cursor: pointer;
+  font-size: 24px;
+  color: #d500f9;
+}
+
+.star.selected {
+  color: #ffeb3b;
+}
+
+/* Estilo para o ListBox das estrelas */
+.rating-select {
+  width: 130%; /* Aumenta o tamanho em 30% */
+  padding: 10px;
+  border: 3px solid #9c27b0;
+  border-radius: 5px;
+  background-color: #1e1e1e;
+  color: #fff;
+  font-size: 2rem;
+  font-family: Arial, sans-serif;
+  appearance: none; /* Remove o estilo padrão do navegador */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.rating-select:hover {
+  border-color: #d500f9;
+}
+
+.rating-select:focus {
+  outline: none;
+  border-color: #d500f9;
+  background-color: #2a2a2a;
+}
+
+textarea {
+  width: 130%;
+  height: 80px;
+  border: 2px solid #9c27b0;
+  border-radius: 5px;
+  background-color: #1e1e1e;
+  color: #cb95d8;
+  padding: 10px;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #d500f9;
+}
+
+.submit-button {
+  background-color: #d500f9;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #b330ca;
+}
+
+.reviews-container {
+  margin-top: 20px;
+}
+
+.review {
+  background-color: #1e1e1e;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #9c27b0;
 }

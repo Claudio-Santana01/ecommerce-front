@@ -2,87 +2,72 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Logo from '../components/Logo';
 import HamburgerMenu from '../components/HamburgerMenu';
+import { FaStar } from 'react-icons/fa';
 import api from '../api';
 import './Contact.css';
 
 const Contact = () => {
-  const { id } = useParams(); // Obtém o ID do livro da URL
-  const [contactDetails, setContactDetails] = useState(null); // Armazena os dados do contato (livro e usuário)
+  const { id } = useParams();
+  const [contactDetails, setContactDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [error, setError] = useState('');
-
-  const didFetch = React.useRef(false);
-  const didFetchBook = React.useRef(false);
+  const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState('');
 
   useEffect(() => {
     const fetchContactDetails = async () => {
-
-      if (didFetch.current) return; // Se já executou, não faz nada
-      didFetch.current = true;
-      
       try {
-        const token = localStorage.getItem('token'); // Obtém o token do localStorage
-        if (!token) {
-          setError('Usuário não autenticado. Faça login.');
-          setLoading(false);
-          return;
-        }
-
-        // Faz a chamada para a API
+        const token = localStorage.getItem('token');
         const response = await api.get(`/api/users/contact/${id}`, {
           headers: { 'x-auth-token': token },
         });
+        setContactDetails(response.data);
 
-        setContactDetails(response.data); // Define os dados retornados
+        const reviewResponse = await api.get(`/api/reviews/${id}`);
+        setReviews(reviewResponse.data);
       } catch (error) {
         console.error('Erro ao buscar os detalhes:', error);
-        const errorMessage =
-          error.response?.data?.message || 'Erro ao carregar os dados do contato.';
-        setError(errorMessage);
+        setError('Erro ao carregar os dados do contato.');
       } finally {
         setLoading(false);
       }
     };
 
     fetchContactDetails();
-  }, []);
+  }, [id]);
 
-  useEffect(() => {
-    const fetchAddViewInBook = async () => {
-      if (didFetchBook.current) return; // Se já executou, não faz nada
-      didFetchBook.current = true;
+  const handleReviewSubmit = async () => {
+    if (!rating || !comment.trim()) {
+      alert('Por favor, insira uma nota e um comentário.');
+      return;
+    }
 
-      try {
-        const token = localStorage.getItem('token'); // Obtém o token do localStorage
-        if (!token) {
-          setError('Usuário não autenticado. Faça login.');
-          setLoading(false);
-          return;
-        }
-
-        // Faz a chamada para a API
-        await api.get(`/api/books/${id}`, {
+    try {
+      const token = localStorage.getItem('token');
+      await api.post(
+        '/api/reviews',
+        { bookId: id, rating, comment },
+        {
           headers: { 'x-auth-token': token },
-        });
-      } catch (error) {
-        console.error('Erro ao visualizar o livro:', error);
-        const errorMessage =
-          error.response?.data?.message || 'Erro ao visualizar o livro';
-        setError(errorMessage);
-      }
-    };
+        }
+      );
 
-    fetchAddViewInBook();
-  }, []);
+      alert('Avaliação enviada com sucesso!');
+      setRating(0);
+      setComment('');
 
-  if (loading) {
-    return <div className="contact-loading">Carregando...</div>;
-  }
+      const reviewResponse = await api.get(`/api/reviews/${id}`);
+      setReviews(reviewResponse.data);
+    } catch (error) {
+      console.error('Erro ao enviar a avaliação:', error);
+      alert('Erro ao enviar a avaliação. Tente novamente.');
+    }
+  };
 
-  if (error) {
-    return <div className="contact-error">{error}</div>;
-  }
+  if (loading) return <div className="contact-loading">Carregando...</div>;
+  if (error) return <div className="contact-error">{error}</div>;
 
   const { book, contact } = contactDetails || {};
 
@@ -101,15 +86,16 @@ const Contact = () => {
           <p>
             <strong>Nome Completo:</strong> {contact?.fullName || 'Não informado'}
           </p>
-          <p><strong>Telefone:</strong> {contact.phone}{' '}
-              {contact.isWhatsApp && (
-                <img
-                  src="/icons/whatsapp-icon.png" // Use o caminho correto para o ícone
-                  alt="WhatsApp"
-                  style={{ width: '20px', marginLeft: '8px' }}
-                />
-              )}
-            </p>
+          <p>
+            <strong>Telefone:</strong> {contact.phone}{' '}
+            {contact.isWhatsApp && (
+              <img
+                src="/icons/whatsapp-icon.png"
+                alt="WhatsApp"
+                style={{ width: '20px', marginLeft: '8px' }}
+              />
+            )}
+          </p>
           <p>
             <strong>E-mail:</strong> {contact?.email || 'Não informado'}
           </p>
@@ -133,6 +119,52 @@ const Contact = () => {
           <p>
             <strong>Descrição:</strong> {book?.description || 'Não informado'}
           </p>
+        </div>
+
+        <div className="reviews-section">
+          <h2 className="reviews-title">Avaliações</h2>
+          <div className="review-input">
+            <div className="rating-container">
+              <select
+                className="star-select"
+                value={rating}
+                onChange={(e) => setRating(Number(e.target.value))}
+              >
+                <option value="0">Selecione uma nota</option>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <option key={star} value={star}>
+                    {'★'.repeat(star)}{'☆'.repeat(5 - star)}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <textarea
+              maxLength={100}
+              placeholder="Escreva um comentário (máx. 100 caracteres)"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              className="review-textbox"
+            />
+            <button className="review-submit-button" onClick={handleReviewSubmit}>
+              Comentar
+            </button>
+          </div>
+
+          <div className="review-list">
+            {reviews.map((review) => (
+              <div key={review._id} className="review-item">
+                <p>
+                  <strong>{review.userId.nickname}:</strong> {review.comment}
+                </p>
+                <p>
+                  Nota:{' '}
+                  {[...Array(review.rating)].map((_, index) => (
+                    <FaStar key={index} size={15} color="#ffc107" />
+                  ))}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
