@@ -35,7 +35,7 @@ const MinhaConta = () => {
         console.log('Dados do usuário:', response.data); // Adicionado para verificar a estrutura
         setFormData((prev) => ({
           ...prev,
-          fullName: response.data.fullName || response.data.name || '', // Ajusta para o campo correto
+          fullName: response.data.name || '', // Certifique-se de que está mapeando 'name' do backend para 'fullName' no frontend
           address: response.data.address || '',
           email: response.data.email || '',
           dob: response.data.dob || '',
@@ -61,25 +61,35 @@ const MinhaConta = () => {
   };
 
   const handleUpdate = async () => {
-    console.log('Dados enviados:', formData); // Log dos dados que serão enviados
-  
     try {
       setLoading(true);
       const userId = localStorage.getItem('userId');
       const token = localStorage.getItem('token');
-      await api.put(`/api/users/${userId}`, formData, {
+      
+      const dataToUpdate = {
+        ...formData,
+        name: formData.fullName, // Mapeia fullName para name
+      };
+  
+      console.log('Dados enviados:', dataToUpdate);
+  
+      const response = await api.put(`/api/users/${userId}`, dataToUpdate, {
         headers: {
           'x-auth-token': token,
         },
       });
+  
       alert('Dados atualizados com sucesso!');
+      console.log('Resposta do servidor:', response.data);
     } catch (err) {
-      console.error('Erro ao atualizar os dados:', err.message);
+      console.error('Erro ao atualizar os dados:', err.response?.data || err.message);
       setError('Erro ao atualizar os dados.');
     } finally {
       setLoading(false);
     }
   };
+  
+  
   
   
   
